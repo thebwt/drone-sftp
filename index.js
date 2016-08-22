@@ -21,10 +21,13 @@ const do_upload = function (workspace, vargs) {
     }).then(function (greetings) {
       console.log('Connection successful. ' + (greetings || ''));
     }).then( function () {
+      console.log('making dir');
       return sftp.mkdir(vargs.destination_path, recursive=true);
     }).then( function() {
+      console.log('building file array');
       return [].concat.apply([], vargs.files.map((f) => { return shelljs.ls(workspace.path + '/' + f); }));
     }).each(function(file) {
+      console.log('transmiting a file');
       var basename = path.basename(file);
 
       console.log('Uploading ' + file + ' as ' + basename + ' into ' + vargs.destination_path);
