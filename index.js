@@ -20,7 +20,9 @@ const do_upload = function (workspace, vargs) {
       privateKey: workspace.keys && workspace.keys['private']
     }).then(function (greetings) {
       console.log('Connection successful. ' + (greetings || ''));
-     
+    }).then( function () {
+      return sftp.mkdir(vargs.destination_path, recursive=True);
+    }).then( function() {
       return [].concat.apply([], vargs.files.map((f) => { return shelljs.ls(workspace.path + '/' + f); }));
     }).each(function(file) {
       var basename = path.basename(file);
