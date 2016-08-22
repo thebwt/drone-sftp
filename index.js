@@ -21,7 +21,7 @@ const do_upload = function (workspace, vargs) {
     }).then(function (greetings) {
       console.log('Connection successful. ' + (greetings || ''));
     }).then( function () {
-      return sftp.mkdir(vargs.destination_path, recursive=True);
+      return sftp.mkdir(vargs.destination_path, recursive=true);
     }).then( function() {
       return [].concat.apply([], vargs.files.map((f) => { return shelljs.ls(workspace.path + '/' + f); }));
     }).each(function(file) {
