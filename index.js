@@ -21,7 +21,7 @@ const do_upload = function (workspace, vargs) {
     }).then(function (greetings) {
       console.log('Connection successful. ' + (greetings || ''));
     }).then( function () {
-      console.log('making dir');
+      console.log('making dir:'  + vargs.destination_path);
       return sftp.mkdir(vargs.destination_path, recursive=true);
     }).then( function() {
       console.log('building file array');
